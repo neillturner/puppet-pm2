@@ -15,8 +15,11 @@ Minimal Usage:
   class { 'pm2': }
 
   class { 'pm2::create_app':
+  
     name    => 'my-nodejs-app',
+    
     require => Class['pm2']
+    
   } 
  
 
