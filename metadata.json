@@ -1,0 +1,46 @@
+{
+  "name": "pm2",
+  "version": "0.0.1",
+  "author": "neillturner",
+  "license": "Apache License, Version 2.0",
+  "summary": "Manage Nodejs Apps with PM2",
+  "source": "https://github.com/neillturner/puppet-pm2.git",
+  "project_page": "",
+  "issues_url": "",
+  "dependencies": [
+    { "name": "puppetlabs/nodejs",
+      "name": "stahnma/epel"
+    }
+  ]
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "10.04",
+        "12.04",
+        "14.04"
+      ]
+    }
+  ]  
+}
