@@ -12,15 +12,12 @@ It would be better to use the nodejs::npm provider instead of execing npm instal
 Minimal Usage: 
 =============
 
-  class { 'pm2': }
+     class { 'pm2': }
 
-  class { 'pm2::create_app':
-  
-    name    => 'my-nodejs-app',
-    
-    require => Class['pm2']
-    
-  } 
+     class { 'pm2::create_app':
+       name    => 'my-nodejs-app',
+       require => Class['pm2']
+     } 
  
 
 Detailed Usage:
