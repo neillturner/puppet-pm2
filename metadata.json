@@ -11,7 +11,7 @@
     { "name": "puppetlabs/nodejs",
       "name": "stahnma/epel"
     }
-  ]
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
