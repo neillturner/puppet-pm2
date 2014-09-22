@@ -1,5 +1,5 @@
 {
-  "name": "pm2",
+  "name": "neillturner-pm2",
   "version": "0.0.1",
   "author": "neillturner",
   "license": "Apache License, Version 2.0",
@@ -8,7 +8,10 @@
   "project_page": "",
   "issues_url": "",
   "dependencies": [
-    { "name": "puppetlabs/nodejs",
+    { 
+      "name": "puppetlabs/nodejs"
+    },
+    {
       "name": "stahnma/epel"
     }
   ],
