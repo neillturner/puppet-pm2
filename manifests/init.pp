@@ -110,5 +110,6 @@ file { '/etc/init.d/pm2':
      notify   => Service["pm2"],
      require  => Exec['install npm package pm2'],
  }
- 
+
+
 }
