@@ -108,7 +108,7 @@ file { "/etc/init.d/pm2":
      ensure   => "present",
      owner    => "root",
      group    => "root",
-     mode     => 0750,
+     mode     => 0755,
      content  => template('pm2/pm2.init.erb'),
      notify   => Service['pm2'],
      require  => Exec['install npm package pm2'],
