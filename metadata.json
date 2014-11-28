@@ -9,7 +9,7 @@
   "issues_url": "",
   "dependencies": [
     { 
-      "name": "puppetlabs/nodejs"
+      "name": "willdurand/nodejs"
     },
     {
       "name": "stahnma/epel"

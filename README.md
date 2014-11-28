@@ -4,7 +4,8 @@ puppet-pm2
 Puppet Module to deploy a nodejs application using PM2 
 
 This is a pretty hacky first version. 
-It would be good to make the create_app a provider called pm2_app. 
+It relies on puppet module willdurand/nodejs to install nodejs and npm.
+It would be good to make the create_app a provider called pm2_app.
 It would be better to use the nodejs::npm provider instead of execing npm install etc.  
 
 
@@ -47,3 +48,14 @@ Detailed Usage:
        require => Class['pm2']
      } 
  
+ Nodejs Configuration: 
+ ====================
+
+ assuming using puppet 3.x with hiera then nodejs can be configured by setting the parameters in hiera:
+
+ nodejs::version:          'stable'
+ nodejs::target_dir:       '/usr/local/bin'
+ nodejs::with_npm:         true
+ nodejs::make_install:     true
+ nodejs::create_symlinks:  false
+
