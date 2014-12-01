@@ -20,10 +20,10 @@
 ### END INIT INFO
 
 name=pm2
-PM2=<%= @pm2_dir %>/bin/pm2
+PM2=<%= @node_dir %>/bin/pm2
 USER=<%= @deamon_user %>
 
-export PATH=$PATH:<%= @pm2_dir %>/bin
+export PATH=$PATH:<%= @node_dir %>/bin
 export HOME="<%= @install_path %>"
 
 lockfile="/var/lock/subsys/pm2"
