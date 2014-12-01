@@ -14,24 +14,25 @@ class pm2(
 
  $install_path = "$install_root/$install_dir"
  
-   # set directory of npm and pm2 
-   case $::osfamily {
-       'RedHat': {
-         $npm_dir = '/usr'
-         $pm2_dir = '/usr'
-         $npmrc_dir = '/usr'
-       }
-       'Debian': {
-         $npm_dir = '/usr'
-         $pm2_dir = '/usr/local'
-         $npmrc_dir = ''
-        }     
-       default: {
-         $npm_dir = '/usr'
-         $pm2_dir = '/usr'
-         $npmrc_dir = '/usr'
-       }
-  } 
+  # set directory of npm and pm2 
+  # case $::osfamily {
+  #     'RedHat': {
+  #      $npm_dir = '/usr/local/node/node-default/bin'
+  #       $pm2_dir = '/usr'
+  #       $npmrc_dir = '/usr'
+  #     }
+  #     'Debian': {
+  #       $npm_dir = '/usr'
+  #       $pm2_dir = '/usr/local'
+  #       $npmrc_dir = ''
+  #      }     
+  #     default: {
+  #       $npm_dir = '/usr'
+  #       $pm2_dir = '/usr'
+  #      $npmrc_dir = '/usr'
+  #     }
+  #} 
+  $node_dir = '/usr/local/node/node-default'
   
 # class { 'epel': }
 
@@ -69,7 +70,7 @@ class pm2(
   } 
   
   # setup global npmrc config file
-  file { "$npmrc_dir/etc/npmrc":
+  file { "$node_dir/etc/npmrc":
        ensure   => "present",
        owner    => $deamon_user,
        group    => $deamon_user,
@@ -79,10 +80,10 @@ class pm2(
  }  
   
 exec { 'install npm package pm2': 
-  command  => "npm install --unsafe-perm -g pm2@$pm2_version",
-  creates   => "$pm2_dir/lib/node_modules/pm2",
+  command  => "$node_dir/bin/npm install --unsafe-perm -g pm2@$pm2_version",
+  creates   => "$node_dir/bin/pm2",
   timeout    => 0,
-  require  => File["$npmrc_dir/etc/npmrc"],
+  require  => File["$node_dir/etc/npmrc"],
 }
 
 # TODO handle initialzing the `pm2 web` monitoring API
