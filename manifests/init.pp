@@ -9,12 +9,12 @@ class pm2(
   $pm2_version               = "latest",
   $install_root              = '/opt',
   $install_dir               = 'nodejs',
+  $node_dir = '/usr/local/node/node-default',
   $deamon_user               = 'nodejs')
 {
 
   $install_path = "$install_root/$install_dir"
-  $node_dir = '/usr/local/node/node-default'
-
+  
   class { '::nodejs': }
  
   group { $deamon_user:
