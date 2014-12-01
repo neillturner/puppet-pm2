@@ -79,7 +79,7 @@ class pm2(
  }  
   
 exec { 'install npm package pm2': 
-  command  => "$npm_dir/bin/npm install --unsafe-perm -g pm2@$pm2_version",
+  command  => "npm install --unsafe-perm -g pm2@$pm2_version",
   creates   => "$pm2_dir/lib/node_modules/pm2",
   timeout    => 0,
   require  => File["$npmrc_dir/etc/npmrc"],
