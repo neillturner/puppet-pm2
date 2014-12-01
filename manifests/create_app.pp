@@ -11,30 +11,13 @@ class pm2::create_app(
   $args            = [],
   $env             = {},
   $install_root    = '/opt',
-  $install_dir     = 'nodejs',    
+  $install_dir     = 'nodejs',
+  $node_dir        = '/usr/local/node/node-default',
   $deamon_user     = 'nodejs')
 {
 
  $install_path = "$install_root/$install_dir"
-
- # set directory of npm and pm2 
- case $::osfamily {
-     'RedHat': {
-       $npm_dir = '/usr'
-       $pm2_dir = '/usr'
-       $npmrc_dir = '/usr'
-     }
-     'Debian': {
-       $npm_dir = '/usr'
-       $pm2_dir = '/usr/local'
-       $npmrc_dir = ''
-      }     
-     default: {
-       $npm_dir = '/usr'
-       $pm2_dir = '/usr'
-       $npmrc_dir = '/usr'
-     }
-  }
+ 
 
   file { $path:
     ensure  => directory,
@@ -52,7 +35,7 @@ class pm2::create_app(
   } 
   
   exec { "npm install $app":
-    command     => "$npm_dir/bin/npm install $app",
+    command     => "$node_dir/bin/npm install $app",
     timeout     => 0, 
     cwd         => "$path/$appversion",
     require     => File["$path/$appversion"]
@@ -105,7 +88,7 @@ class pm2::create_app(
   # BUG: bug in PM2 means have to set HOME variable for user 
   
   exec {  "pm2 delete $name":
-    command     => "$pm2_dir/bin/pm2 delete $name",
+    command     => "$node_dir/bin/pm2 delete $name",
     timeout     => 0,
     user        => $deamon_user,
     group       => $deamon_user, 
