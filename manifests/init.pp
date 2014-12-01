@@ -69,11 +69,19 @@ class pm2(
     require => [User[$deamon_user], Group[$deamon_user]]
   } 
   
+  file { "$node_dir/etc":
+     ensure  => "directory",
+     owner   => 'root',
+     group   => 'root',
+     mode    => 755,
+     require => User["nodejs"],	 
+ }
+  
   # setup global npmrc config file
   file { "$node_dir/etc/npmrc":
        ensure   => "present",
-       owner    => $deamon_user,
-       group    => $deamon_user,
+       owner    => root,
+       group    => root,
        mode     => 0755,
        content  => template('pm2/npmrc.erb'),
        require  => File[$install_path],
