@@ -33,24 +33,21 @@ class pm2(
        }
   } 
   
- class { 'epel': }
+# class { 'epel': }
 
  class { '::nodejs':
-   require => Class['epel'],
+ #  require => Class['epel'],
  }
  
-
-
- exec { 'upgrade npm':
-  command     => "$npm_dir/bin/npm i --unsafe-perm -g npm",
-  timeout     => 0, 
-  require     => [Class['nodejs']]
-}   
-
+# exec { 'upgrade npm':
+#  command     => "$npm_dir/bin/npm i --unsafe-perm -g npm",
+#  timeout     => 0, 
+#  require     => [Class['nodejs']]
+#}   
 
   group { $deamon_user:
     ensure => present,
-    require  => Exec['upgrade npm'],
+    require  => Class['nodejs'],
   }
 
   user { $deamon_user:
