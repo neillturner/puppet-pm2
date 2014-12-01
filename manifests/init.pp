@@ -74,7 +74,7 @@ class pm2(
      owner   => 'root',
      group   => 'root',
      mode    => 755,
-     require => User["nodejs"],	 
+     require => File[$install_path],	 
  }
   
   # setup global npmrc config file
@@ -84,7 +84,7 @@ class pm2(
        group    => root,
        mode     => 0755,
        content  => template('pm2/npmrc.erb'),
-       require  => File[$install_path],
+       require  => File["$node_dir/etc"],
  }  
   
 exec { 'install npm package pm2': 
