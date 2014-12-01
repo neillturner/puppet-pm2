@@ -75,7 +75,7 @@ class pm2(
        group    => $deamon_user,
        mode     => 0755,
        content  => template('pm2/npmrc.erb'),
-       require  => Exec['upgrade npm'],
+       require  => File[$install_path],
  }  
   
 exec { 'install npm package pm2': 
