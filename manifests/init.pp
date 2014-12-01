@@ -12,40 +12,11 @@ class pm2(
   $deamon_user               = 'nodejs')
 {
 
- $install_path = "$install_root/$install_dir"
- 
-  # set directory of npm and pm2 
-  # case $::osfamily {
-  #     'RedHat': {
-  #      $npm_dir = '/usr/local/node/node-default/bin'
-  #       $pm2_dir = '/usr'
-  #       $npmrc_dir = '/usr'
-  #     }
-  #     'Debian': {
-  #       $npm_dir = '/usr'
-  #       $pm2_dir = '/usr/local'
-  #       $npmrc_dir = ''
-  #      }     
-  #     default: {
-  #       $npm_dir = '/usr'
-  #       $pm2_dir = '/usr'
-  #      $npmrc_dir = '/usr'
-  #     }
-  #} 
+  $install_path = "$install_root/$install_dir"
   $node_dir = '/usr/local/node/node-default'
-  
-# class { 'epel': }
 
- class { '::nodejs':
- #  require => Class['epel'],
- }
+  class { '::nodejs': }
  
-# exec { 'upgrade npm':
-#  command     => "$npm_dir/bin/npm i --unsafe-perm -g npm",
-#  timeout     => 0, 
-#  require     => [Class['nodejs']]
-#}   
-
   group { $deamon_user:
     ensure => present,
     require  => Class['nodejs'],
