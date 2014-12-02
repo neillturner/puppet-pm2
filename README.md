@@ -51,11 +51,16 @@ Detailed Usage:
  Nodejs Configuration: 
  ====================
 
+ module "willdurand/nodejs" is called to do the nodejs install. 
  assuming using puppet 3.x with hiera then nodejs can be configured by setting the parameters in hiera:
 
- nodejs::version:          'stable'
- nodejs::target_dir:       '/usr/local/bin'
- nodejs::with_npm:         true
- nodejs::make_install:     true
- nodejs::create_symlinks:  false
+     nodejs::version:          'stable'
+     nodejs::target_dir:       '/usr/local/bin'
+     nodejs::with_npm:         true
+     nodejs::make_install:     true
+     nodejs::create_symlinks:  false
+     
+ Also you need to set the path in factor befor running this as willdurand/nodejs relies on the $::path variable
+  
+     set path to '/usr/local/node/node-default/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin'
 
