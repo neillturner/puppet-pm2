@@ -48,8 +48,8 @@ Detailed Usage:
        require => Class['pm2']
      } 
  
- Nodejs Configuration: 
- ====================
+Nodejs Configuration: 
+====================
 
  module "willdurand/nodejs" is called to do the nodejs install. 
  assuming using puppet 3.x with hiera then nodejs can be configured by setting the parameters in hiera:
