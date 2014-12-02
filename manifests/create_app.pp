@@ -12,7 +12,7 @@ class pm2::create_app(
   $env             = {},
   $install_root    = '/opt',
   $install_dir     = 'nodejs',
-  $node_dir        = '/usr/local/node/node-default',
+#  $node_dir        = '/usr/local/node/node-default',
   $deamon_user     = 'nodejs')
 {
 
@@ -35,7 +35,7 @@ class pm2::create_app(
   } 
   
   exec { "npm install $app":
-    command     => "$node_dir/bin/npm install $app",
+    command     => "npm install $app",
     timeout     => 0, 
     cwd         => "$path/$appversion",
     require     => File["$path/$appversion"]
@@ -88,13 +88,13 @@ class pm2::create_app(
   # BUG: bug in PM2 means have to set HOME variable for user 
   
   exec {  "pm2 delete $name":
-    command     => "$node_dir/bin/pm2 delete $name",
+    command     => "pm2 delete $name",
     timeout     => 0,
     user        => $deamon_user,
     group       => $deamon_user, 
     environment => ["HOME=$install_root/$install_dir"],
     cwd         => "$path/current",
-    onlyif      => "$pm2_dir/bin/pm2 -m list | grep '\-\-\- $name'",
+    onlyif      => "pm2 -m list | grep '\-\-\- $name'",
     require     => File["$path/pids"]
   }  
 
@@ -110,7 +110,7 @@ class pm2::create_app(
   # now tell pm2 to startup using a cluster with as many nodes as CPUs
   # BUG: bug in PM2 means have to set HOME variable for user   
   exec {  "pm2 start '$path/pm2.json' --name '$name'":
-    command     => "$pm2_dir/bin/pm2 start '$path/pm2.json' --name '$name'",
+    command     => "pm2 start '$path/pm2.json' --name '$name'",
     timeout     => 0,
     user        => $deamon_user,
     environment => ["HOME=$install_root/$install_dir"],
