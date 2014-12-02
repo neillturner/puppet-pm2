@@ -36,6 +36,7 @@ class pm2::create_app(
   
   exec { "npm install $app":
     command     => "npm install $app",
+    path        => $::path,
     timeout     => 0, 
     cwd         => "$path/$appversion",
     require     => File["$path/$appversion"]
@@ -90,6 +91,7 @@ class pm2::create_app(
   exec {  "pm2 delete $name":
     command     => "pm2 delete $name",
     timeout     => 0,
+    path        => $::path,
     user        => $deamon_user,
     group       => $deamon_user, 
     environment => ["HOME=$install_root/$install_dir"],
@@ -112,6 +114,7 @@ class pm2::create_app(
   exec {  "pm2 start '$path/pm2.json' --name '$name'":
     command     => "pm2 start '$path/pm2.json' --name '$name'",
     timeout     => 0,
+    path        => $::path,
     user        => $deamon_user,
     environment => ["HOME=$install_root/$install_dir"],
     group       => $deamon_user, 
