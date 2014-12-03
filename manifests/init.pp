@@ -6,6 +6,7 @@ class pm2(
   $npm_repository            = "https://registry.npmjs.org",
   $npm_auth                  = '',
   $npm_always_auth           = false,
+  $npm_email                 = 'test@test.org',
   $pm2_version               = "latest",
   $install_root              = '/opt',
   $install_dir               = 'nodejs',
