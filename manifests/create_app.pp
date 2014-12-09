@@ -9,7 +9,7 @@ class pm2::create_app(
   $path            = "/opt/nodejs/$name",
   $script          = "lib/app.js",              
   $args            = [],
-  $env             = {},
+  $env             = '',
   $install_root    = '/opt',
   $install_dir     = 'nodejs',
 #  $node_dir        = '/usr/local/node/node-default',
