@@ -10,9 +10,6 @@
   "dependencies": [
     { 
       "name": "willdurand/nodejs"
-    },
-    {
-      "name": "stahnma/epel"
     }
   ],
   "operatingsystem_support": [
