@@ -54,7 +54,7 @@ Nodejs Configuration:
  module "willdurand/nodejs" is called to do the nodejs install. 
  assuming using puppet 3.x with hiera then nodejs can be configured by setting the parameters in hiera:
 
-     nodejs::version:          'stable'
+     nodejs::version:          'stable'   ('vX.Y.Z', 'latest' or 'stable')
      nodejs::target_dir:       '/usr/local/bin'
      nodejs::with_npm:         true
      nodejs::make_install:     true
