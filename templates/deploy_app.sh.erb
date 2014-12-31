@@ -3,6 +3,7 @@
 # install a nodejs app and run in pm2 
 #
 set -e
+set -v
 export PATH=/usr/local/node/node-default/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 echo "Installing app $1 $2 script $3 env $4 args $5"
 name=$1
@@ -34,11 +35,9 @@ deamon_user='<%= @deamon_user %>'
 install_path="$install_root/$install_dir"
 apppath="$install_root/$install_dir/$name"
 
-echo "mkdir -p $apppath/$appversion"
 mkdir -p "$apppath/$appversion"
 chown -Rf $deamon_user:$deamon_user "$apppath"
 cd "$apppath/$appversion"
-echo "npm install $app@$appversion"
 npm install $app@$appversion
 chown -Rf $deamon_user:$deamon_user "$apppath/$appversion"
 
@@ -56,7 +55,6 @@ cat <<EOF > "$apppath/pm2.json"
   "pid_file"   : "/var/run/pm2/$name.pid"
  }
 EOF
-echo "created $apppath/pm2.json"
 chown -Rf $deamon_user:$deamon_user "$apppath/pm2.json"
 chmod 0444 "$apppath/pm2.json"
 
@@ -81,9 +79,9 @@ chown -Rf $deamon_user:$deamon_user "$apppath/pids"
 #       then start the app
 # BUG: bug in PM2 means have to set HOME variable for user
 
-cd "$apppath/current"
+
 if   pm2 -m list | grep -q "\-\-\- $name" ; then
-  echo "pm2 delete $name"
+  cd "$apppath/current"
   env HOME=$install_root/$install_dir pm2 delete $name
 fi
 
@@ -98,7 +96,6 @@ chown -Rf $deamon_user:$deamon_user "$apppath/current"
 # BUG: bug in PM2 means have to set HOME variable for user
 
 cd "$apppath"
-echo "env HOME=$install_root/$install_dir pm2 start \"$apppath/pm2.json\" --name $name"
 env HOME=$install_root/$install_dir pm2 start "$apppath/pm2.json" --name "$name"
 
 
