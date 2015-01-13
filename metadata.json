@@ -5,8 +5,8 @@
   "license": "Apache License, Version 2.0",
   "summary": "Manage Nodejs Apps with PM2",
   "source": "https://github.com/neillturner/puppet-pm2.git",
-  "project_page": "",
-  "issues_url": "",
+  "project_page": "https://github.com/neillturner/puppet-pm2",
+  "issues_url": "https://github.com/neillturner/puppet-pm2/issues",
   "dependencies": [
     { 
       "name": "willdurand/nodejs"
