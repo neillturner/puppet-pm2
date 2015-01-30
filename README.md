@@ -82,3 +82,25 @@ Nodejs Configuration:
   
      set path to '/usr/local/node/node-default/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin'
 
+Working with PM2 - Commands, Debugging etc. 
+===========================================
+ logon to to the daemon user (by default nodejs) and you will be in home directory (/opt/nodejs by default) 
+
+ To show running apps:
+
+     pm2 list
+
+ To restart my-app
+
+    In the home directory (/opt/nodejs by default)
+
+    pm2 kill
+    pm2 start "my-app/pm2.json" --name "my-app"
+
+ To see the logs 
+
+    pm2 logs 
+
+ Deploying my-app
+
+    sudo -u nodejs /opt/nodejs/deploy_app.sh my-app 0.1.182 lib/app.js '{ "env.NODE_ENV" : "dev"}' 
