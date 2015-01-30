@@ -1,6 +1,6 @@
 {
   "name": "neillturner-pm2",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "neillturner",
   "license": "Apache License, Version 2.0",
   "summary": "Manage Nodejs Apps with PM2",
