@@ -1,5 +1,6 @@
 #!/bin/bash
 export PATH=/usr/local/node/node-default/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+sleep 60
 if !  pm2 -m list | grep 'status : online' ; then
        echo "pm2 deploy failed"
        exit 1
