@@ -55,7 +55,7 @@ App Deployment:
      so deployment can be done later via ssh: 
      To do deployment this way run: 
         sudo su - nodejs
-       /opt/nodejs/deploy_app_script.sh myapp 0.0.1-110  serve_app.js '{ "env.NODE_ENV" : "test" }'  "[arg='value']"
+        /opt/nodejs/deploy_app.sh myapp 0.0.1-110  serve_app.js '{ "env.NODE_ENV" : "test" }'  "[arg='value']"
      This way a generic nodejs/pm2 server can be build and ssh used to deploy a given app as part of a continuous integration 
      workflow using tools like jenkins or teamcity.
 
@@ -64,7 +64,13 @@ App Deployment:
 
      NOTE: Both the puppet and bash script deployment is done via npm so the application is assumed to be in a public or private 
      repository like sinopia. The other alternative is deploy from a source repository like git. PM2-Deploy supports this form of 
-     deployment but currently there is no puppet or bash script to support this but it can be easily done.    
+     deployment but currently there is no puppet or bash script to support this but it can be easily done.  
+     
+     NOTE: To use nar(NPM Archive) as an alternative to npm install 
+     To do deployment this way run: 
+        sudo su - nodejs
+        /opt/nodejs/deploy_app_nar.sh myapp-0.0.1-110.nar  myapp 0.0.1-110  serve_app.js '{ "env.NODE_ENV" : "test" }'  "[arg='value']"
+     The nar file will first need to be download from a remote source like AWS S3.  
  
 Nodejs Configuration: 
 ====================

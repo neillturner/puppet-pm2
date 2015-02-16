@@ -11,7 +11,9 @@ class pm2(
   $install_root              = '/opt',
   $install_dir               = 'nodejs',
   $node_dir = '/usr/local/node/node-default',
-  $deamon_user               = 'nodejs')
+  $deamon_user               = 'nodejs',
+  $nar_deployment            = false,
+  $nar_version               = 'latest',)
 {
 
   $install_path = "${install_root}/${install_dir}"
@@ -106,5 +108,25 @@ class pm2(
     mode    => '0755',
     content => template('pm2/deploy_test.sh.erb'),
     require => File["${install_root}/${install_dir}/deploy_app.sh"]
+  }
+  
+  if $nar_deployment == true {  
+
+    file { "${install_root}/${install_dir}/deploy_app_nar.sh":
+      ensure  => file,
+      owner   => $deamon_user,
+      group   => $deamon_user,
+      mode    => '0755',
+      content => template('pm2/deploy_app_nar.sh.erb'),
+      require => File["${install_root}/${install_dir}/deploy_test.sh"],
+    }  
+    
+    exec { 'install npm package nar':
+      command => "npm install -g nar@${nar_version}",
+      path    => $::path,
+      creates => "${node_dir}/bin/nar",
+      timeout => 0,
+      require => File["${install_root}/${install_dir}/deploy_app_nar.sh"],
+    }    
   }
 }
