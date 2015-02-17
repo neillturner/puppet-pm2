@@ -79,7 +79,7 @@ chown -Rf $deamon_user:$deamon_user "$apppath/pids"
 #       the only way to process changes in the pm2.json file is to delete and
 #       then start the app
 # BUG: bug in PM2 means have to set HOME variable for user
-
+#
 
 if   pm2 -m list | grep -q "\-\-\- $name" ; then
   cd "$apppath/current"
