@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# install a nodejs app from a nar file and run in pm2 
+# install a nodejs app and run in pm2 
 #
 set -e
 set -v
 export PATH=/usr/local/node/node-default/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
-echo "Installing nar file $1 containing app $2 $3 from script $4 env $5 args $6"
-nar_file=$1
+echo "Installing narfile $1 app $2 $3 script $4 env $5 args $6"
+narfile=$1
 name=$2
 app=$2
 if [[ "$3" != "" ]]; then
@@ -19,6 +19,7 @@ if [[ "$4" != "" ]]; then
 else
     appscript="lib/app.js"
 fi
+
 if [[ "$5" != "" ]]; then
     appenv="$5"
 else
@@ -34,11 +35,13 @@ install_dir='<%= @install_dir %>'
 deamon_user='<%= @deamon_user %>'
 install_path="$install_root/$install_dir"
 apppath="$install_root/$install_dir/$name"
+
 mkdir -p "$apppath/$appversion"
 chown -Rf $deamon_user:$deamon_user "$apppath"
 cd "$apppath/$appversion"
-nar install $nar_file
+nar install $narfile
 chown -Rf $deamon_user:$deamon_user "$apppath/$appversion"
+
 if [  -f "$apppath/pm2.json" ]; then
   chmod 0744 "$apppath/pm2.json"
 fi
@@ -55,6 +58,7 @@ cat <<EOF > "$apppath/pm2.json"
 EOF
 chown -Rf $deamon_user:$deamon_user "$apppath/pm2.json"
 chmod 0444 "$apppath/pm2.json"
+
 mkdir -p "/var/log/pm2/$name"
 chown -Rf $deamon_user:$deamon_user "/var/log/pm2/$name"
 mkdir -p "/var/log/pm2/$name"
@@ -70,22 +74,28 @@ if [ ! -L "$apppath/pids" ]; then
   ln -s "/var/run/pm2" "$apppath/pids"
 fi
 chown -Rf $deamon_user:$deamon_user "$apppath/pids"
+
 # HACK: `pm2 reload` does NOT reload changes to the pm2.json file
 #       the only way to process changes in the pm2.json file is to delete and
 #       then start the app
 # BUG: bug in PM2 means have to set HOME variable for user
+
+
 if   pm2 -m list | grep -q "\-\-\- $name" ; then
   cd "$apppath/current"
   env HOME=$install_root/$install_dir pm2 delete $name
 fi
+
 cd "$apppath"
 if [  -L "$apppath/current" ]; then
   rm "$apppath/current"
 fi
 ln -s "$apppath/$appversion" "$apppath/current"
 chown -Rf $deamon_user:$deamon_user "$apppath/current"
+
 # now tell pm2 to startup using a cluster with as many nodes as CPUs
 # BUG: bug in PM2 means have to set HOME variable for user
+
 cd "$apppath"
 env HOME=$install_root/$install_dir pm2 start "$apppath/pm2.json" --name "$name"
 
