@@ -1,7 +1,7 @@
 {
   "name":   "<%= @name %>",
   "script":    "<%= "#{@path}/current/node_modules/#{@name}/#{@script}" %>",
-  "args":   "<%= @args.to_a.to_json.gsub('"', "'") %>",
+  "args":   "<%= @args || @args.to_a.to_json.gsub('"', "'") %>",
   "env":    <%= @env || {}.to_json  %>,
   "error_file" : "/var/log/pm2/<%= @name %>/error.log",
   "out_file"   : "/var/log/pm2/<%= @name %>/out.log",
