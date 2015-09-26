@@ -25,7 +25,7 @@ Detailed Usage:
 ===============
 
      class { 'pm2':
-       npm_repository    => "https://registry.npmjs.org",
+       npm_repository    => "https://mylocal.repo",
        npm_auth          => 'Ashtyhy=+as',
        npm_always_auth   => true,
        pm2_version       => "latest",
