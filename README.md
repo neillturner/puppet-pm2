@@ -82,8 +82,7 @@ Nodejs Configuration:
      nodejs::target_dir:       '/usr/local/bin'
      nodejs::with_npm:         true
      nodejs::make_install:     true
-     nodejs::create_symlinks:  false
-     
+
  Also you need to set the path in Factor before running this as willdurand/nodejs relies on the $::path variable
   
      set path to '/usr/local/node/node-default/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin'
