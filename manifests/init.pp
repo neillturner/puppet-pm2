@@ -77,9 +77,10 @@ class pm2(
   }
 
   service { 'pm2':
-    ensure  => running,
-    enable  => true,
-    require => Exec['install npm package pm2'],
+    ensure   => running,
+    enable   => true,
+    provider => 'init',
+    require  => Exec['install npm package pm2'],
   }
 
   file { '/etc/init.d/pm2':
