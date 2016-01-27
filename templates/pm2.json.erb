@@ -2,6 +2,8 @@
   "name":   "<%= @name %>",
   "script":    "<%= "#{@path}/current/node_modules/#{@name}/#{@script}" %>",
   "args":   "<%= @args || @args.to_a.to_json.gsub('"', "'") %>",
+  "max_restarts": "<%= @max_restarts %>",
+  "min_uptime" : "<%= @min_uptime %>",
   "env":    <%= @env || {}.to_json  %>,
   "error_file" : "/var/log/pm2/<%= @name %>/error.log",
   "out_file"   : "/var/log/pm2/<%= @name %>/out.log",

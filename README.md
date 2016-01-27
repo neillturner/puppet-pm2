@@ -31,6 +31,8 @@ Detailed Usage:
        pm2_version       => "latest",
        install_root      => '/opt',
        install_dir       => 'nodejs',
+       max_restarts      => 10,
+       min_uptime        => 3500,
        deamon_user       => 'nodejs',  
      }
 
@@ -44,6 +46,8 @@ Detailed Usage:
        env             => '{ "env.NODE_ENV" : "test" }',
        install_root    => '/opt',
        install_dir     => 'nodejs',
+       max_restarts    => 10,
+       min_uptime      => 3500,       
        deamon_user     => 'nodejs',     
        require => Class['pm2']
      } 

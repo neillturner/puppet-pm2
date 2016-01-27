@@ -49,6 +49,8 @@ cat <<EOF > "$apppath/pm2.json"
   "name":   "$name",
   "script":    "$apppath/current/node_modules/$name/$appscript",
   "args":   $appargs,
+  "max_restarts": "<%= @max_restarts %>",
+  "min_uptime": "<%= @min_uptime %>",
   "env":    $appenv,
   "error_file" : "/var/log/pm2/$name/error.log",
   "out_file"   : "/var/log/pm2/$name/out.log",

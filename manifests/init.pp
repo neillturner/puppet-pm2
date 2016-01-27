@@ -3,17 +3,19 @@
 # install nodejs and pm2 to be able run nodejs apps
 #
 class pm2(
-  $npm_repository            = 'https://registry.npmjs.org',
-  $npm_auth                  = '',
-  $npm_always_auth           = false,
-  $npm_email                 = 'test@test.org',
-  $pm2_version               = 'latest',
-  $install_root              = '/opt',
-  $install_dir               = 'nodejs',
-  $node_dir = '/usr/local/node/node-default',
-  $deamon_user               = 'nodejs',
-  $nar_deployment            = false,
-  $nar_version               = 'latest',)
+  $npm_repository  = 'https://registry.npmjs.org',
+  $npm_auth        = '',
+  $npm_always_auth = false,
+  $npm_email       = 'test@test.org',
+  $pm2_version     = 'latest',
+  $install_root    = '/opt',
+  $install_dir     = 'nodejs',
+  $node_dir        = '/usr/local/node/node-default',
+  $max_restarts    = 10,
+  $min_uptime      = 3500,
+  $deamon_user     = 'nodejs',
+  $nar_deployment  = false,
+  $nar_version     = 'latest',)
 {
 
   $install_path = "${install_root}/${install_dir}"
